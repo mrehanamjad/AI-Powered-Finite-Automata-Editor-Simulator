@@ -40,7 +40,7 @@ wheels = [
 ]
 
 [[package]]
-name = "backend-fastapi"
+name = "backend"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
