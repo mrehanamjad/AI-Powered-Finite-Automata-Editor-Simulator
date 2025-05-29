@@ -2,9 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  title: 'FA-Editor-AI',
+  description: 'AI Powered Finite Autometa Editor and Simulator | Design, visualize, and simulate Deterministic and Non-deterministic Finite Automata | Convert Regex to DFA and NFA | AI Assistant for Finite Automata',
 }
 
 export default function RootLayout({
