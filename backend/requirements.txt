@@ -1,3 +1,6 @@
 fastapi
 automata-lib
 uvicorn
+google-generativeai
+langchain
+langchain-google-genai
