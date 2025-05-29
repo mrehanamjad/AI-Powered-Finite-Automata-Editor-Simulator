@@ -6,6 +6,8 @@ from automata.fa.dfa import DFA
 from typing import Dict, Any
 import uvicorn
 
+from ai import generate_regex_from_natural_language  # Importing from ai.py
+
 app = FastAPI(
     title="Regex Pattern Simulator API",
     description="API for simulating regex patterns using automata theory",
@@ -36,6 +38,9 @@ class DFANFAJsonUIResponse(BaseModel):
 class RegexToDFaNFAResponse(BaseModel):
     dfa: DFANFAJsonUIResponse
     nfa: DFANFAJsonUIResponse
+
+class AIRegexRequest(BaseModel):
+    description: str
 
 # ---------- Utility Functions ----------
 
@@ -77,6 +82,37 @@ def convert_dfa_nfa_json_to_ui_format(dfa_json: Dict[str, Any]) -> Dict[str, str
     }
 
 
+def regex_to_dfa_nfa(regex: str) -> Dict[str, Any]:
+    """Convert regex to DFA and NFA JSON format"""
+    nfa = build_nfa_from_regex(request.regex)
+    dfa = convert_nfa_to_dfa(nfa)
+
+    nfa_json = {
+            "states": list(nfa.states),
+            "alphabet": list(nfa.input_symbols),
+            "start_state": nfa.initial_state,
+            "final_states": list(nfa.final_states),
+            "transitions": nfa.transitions
+        }
+
+    dfa_json = {
+            "states": list(dfa.states),
+            "alphabet": list(dfa.input_symbols),
+            "start_state": dfa.initial_state,
+            "final_states": list(dfa.final_states),
+            "transitions": dfa.transitions
+        }
+
+    dfa_ui = convert_dfa_nfa_json_to_ui_format(dfa_json)
+    nfa_ui = convert_dfa_nfa_json_to_ui_format(nfa_json)
+
+    return {
+            "dfa": dfa_ui,
+            "nfa": nfa_ui
+    }
+
+   
+
 
 # ---------- API Endpoints ----------
 
@@ -96,36 +132,39 @@ async def health_check():
     return {"status": "healthy"}
 
 @app.post("/dfa-nfa", response_model=RegexToDFaNFAResponse)
-async def regex_to_dfa_nfa(request: RegexTestRequest):
+async def regex_to_dfa_nfa_api(request: RegexTestRequest):
     if not request.regex.strip():
         raise HTTPException(status_code=400, detail="Regex pattern is required")
 
     try:
-        nfa = build_nfa_from_regex(request.regex)
-        dfa = convert_nfa_to_dfa(nfa)
-
-        nfa_json = {
-            "states": list(nfa.states),
-            "alphabet": list(nfa.input_symbols),
-            "start_state": nfa.initial_state,
-            "final_states": list(nfa.final_states),
-            "transitions": nfa.transitions
-        }
-
-        dfa_json = {
-            "states": list(dfa.states),
-            "alphabet": list(dfa.input_symbols),
-            "start_state": dfa.initial_state,
-            "final_states": list(dfa.final_states),
-            "transitions": dfa.transitions
-        }
-
-        dfa_ui = convert_dfa_nfa_json_to_ui_format(dfa_json)
-        nfa_ui = convert_dfa_nfa_json_to_ui_format(nfa_json)
+        
+        dfa_nfa = regex_to_dfa_nfa(request.regex)
 
         return RegexToDFaNFAResponse(
-            dfa=DFANFAJsonUIResponse(**dfa_ui),
-            nfa=DFANFAJsonUIResponse(**nfa_ui)
+            dfa=DFANFAJsonUIResponse(**dfa_nfa['dfa']),
+            nfa=DFANFAJsonUIResponse(**dfa_nfa['nfa'])
+        )
+
+    except NotImplementedError as nie:
+        raise HTTPException(status_code=501, detail=str(nie))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Simulation error: {str(e)}")
+
+
+@app.post("/ai-dfa-nfa", response_model=RegexToDFaNFAResponse)
+async def generate_dfa_nfa_from_description(request: AIRegexRequest):
+    if not request.description.strip():
+        raise HTTPException(status_code=400, detail="Description is required")
+
+    try:
+        # Step 1: Get regex from Gemini
+        regex = generate_regex_from_natural_language(request.description)
+
+        dfa_nfa = regex_to_dfa_nfa(regex)
+
+        return RegexToDFaNFAResponse(
+            dfa=DFANFAJsonUIResponse(**dfa_nfa['dfa']),
+            nfa=DFANFAJsonUIResponse(**dfa_nfa['nfa'])
         )
 
     except NotImplementedError as nie:
