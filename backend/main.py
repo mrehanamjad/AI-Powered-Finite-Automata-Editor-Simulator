@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from automata.fa.nfa import NFA
 from automata.fa.dfa import DFA
@@ -9,6 +10,15 @@ app = FastAPI(
     title="Regex Pattern Simulator API",
     description="API for simulating regex patterns using automata theory",
     version="1.0.0"
+)
+
+# ---------- Middleware for CORS ----------
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Replace "*" with frontend URL in production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # ---------- Pydantic Models ----------
