@@ -6,7 +6,7 @@ from automata.fa.dfa import DFA
 from typing import Dict, Any
 import uvicorn
 
-from ai import generate_regex_from_natural_language  # Importing from ai.py
+from ai import generate_regex_from_natural_language  # Import from your ai.py
 
 app = FastAPI(
     title="Regex Pattern Simulator API",
@@ -57,16 +57,23 @@ def convert_nfa_to_dfa(nfa: NFA) -> DFA:
 
 def convert_dfa_nfa_json_to_ui_format(data: Dict[str, Any]) -> Dict[str, str]:
     """Convert DFA/NFA JSON to UI-friendly format"""
-    states = ', '.join([f"q{str(state)}" for state in data['states']])
+    states = ', '.join([f"q{state}" for state in data['states']])
     alphabet = ', '.join(map(str, data['alphabet']))
-    initial_state = f"q{str(data['start_state'])}"
-    accepting_states = ', '.join([f"q{str(state)}" for state in data['final_states']])
+    initial_state = f"q{data['start_state']}"
+    accepting_states = ', '.join([f"q{state}" for state in data['final_states']])
 
     transitions = []
     for from_state, symbol_map in data['transitions'].items():
         for symbol, to_state in symbol_map.items():
-            transition_line = f"q{str(from_state)},{symbol} → q{str(to_state)}"
+            # Handle NFA case where to_state is a set
+            if isinstance(to_state, set):
+                to_state_str = ', '.join([f"q{s}" for s in to_state])
+            else:
+                to_state_str = f"q{to_state}"
+
+            transition_line = f"q{from_state},{symbol} → {to_state_str}"
             transitions.append(transition_line)
+
     transitions_str = '\n'.join(transitions)
 
     return {

@@ -59,6 +59,10 @@ export default function AutomataInput({
   const [regexExpError, setRegexExpError] = useState("");
   const [loadingApi, setLoadingApi] = useState(false);
   const [regexDialogOpen, setRegexDialogOpen] = useState(false);
+  const [aiDialogOpen, setAIDialogOpen] = useState(false);
+  const [aiInput, setAiInput] = useState("");
+  const [aiResponse, setAiResponse] = useState("");
+  const [loadingAiResponse, setLoadingAiResponse] = useState(false);
 
   useEffect(() => {
     // Convert transitions object to text format
@@ -134,6 +138,40 @@ export default function AutomataInput({
       transitions,
     };
   }
+
+const handleAiSubmit = async () => {
+  if (!aiInput.trim()) return;
+
+  setLoadingAiResponse(true);
+  setAiResponse("");
+
+  try {
+    const res = await fetch("https://fa-editor-ai-api.vercel.app/ai-dfa-nfa", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ description: aiInput }),
+    });
+
+    if (!res.ok) throw new Error("Failed to fetch AI response");
+
+    const data: AutomatonResponse = await res.json();
+
+    if (data?.nfa) {
+      const parsed = parseAutomaton(data.nfa, "NFA");
+      onChange(parsed); // <- Now using the NFA
+      setAIDialogOpen(false);
+    } else {
+      setValidationErrors(["Invalid response from server"]);
+    }
+  } catch (err) {
+    console.log("Error fetching AI response:", err);
+    setAiResponse("Error fetching AI response");
+    setValidationErrors(["Error fetching AI response"]);
+  } finally {
+    setLoadingAiResponse(false);
+  }
+};
+
 
   const handleConvertRegex = async () => {
     const isValid = isValidRegex(regex);
@@ -335,14 +373,45 @@ export default function AutomataInput({
             </div>
             <DialogFooter>
               <Button onClick={handleConvertRegex} className="bg-green-500">
-                {loadingApi? "Loading..." :"Get DFA/NFA"}
+                {loadingApi ? "Loading..." : "Get DFA/NFA"}
               </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
-        <Button type="button" onClick={() => console.log("AI clicked")}>
-          AI ✨
-        </Button>
+        {/* ----- Ai ------*/}
+        <Dialog open={aiDialogOpen} onOpenChange={setAIDialogOpen}>
+          <DialogTrigger asChild>
+            <Button type="button" onClick={() => setAIDialogOpen(true)}>
+              AI ✨
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="sm:max-w-[500px]">
+            <DialogHeader>
+              <DialogTitle>Ask AI a Question</DialogTitle>
+              <DialogDescription>
+                Type a question about finite automata, regular expressions, or
+                anything related. The AI will try to provide you with DFA or
+                NFA.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="grid gap-4 py-4">
+              <Textarea
+                placeholder="e.g., Design a DFA that accepts all strings over the alphabet {a, b} where the string contains zero or more 'a's followed by exactly one 'b' at the end."
+                value={aiInput}
+                onChange={(e) => setAiInput(e.target.value)}
+                rows={3}
+              />
+              <Button onClick={handleAiSubmit} disabled={loadingAiResponse}>
+                {loadingAiResponse ? "Thinking..." : "Ask"}
+              </Button>
+              {aiResponse && (
+                <div className="border p-3 rounded bg-muted text-sm whitespace-pre-wrap">
+                  {aiResponse}
+                </div>
+              )}
+            </div>
+          </DialogContent>
+        </Dialog>
       </div>
       <div>
         <Label htmlFor="type">Type</Label>
