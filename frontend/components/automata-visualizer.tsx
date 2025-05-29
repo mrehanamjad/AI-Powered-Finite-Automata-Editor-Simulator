@@ -9,7 +9,7 @@ import AutomataGraph from "./automata-graph"
 import AutomataSimulator from "./automata-simulator"
 import AutomataExamples from "./automata-examples"
 import { ModeToggle } from "./mode-toggle"
-import { Download, Share2, Info, Maximize2 } from "lucide-react"
+import { Download, Info, Maximize2, ChartNetwork } from "lucide-react"
 import type { AutomataDefinition, SimulationState } from "@/lib/automata-types"
 import { defaultDFA } from "@/lib/automata-examples"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
@@ -103,15 +103,15 @@ export default function AutomataVisualizer() {
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-4">
-          <h2 className="text-2xl font-bold">Automata Visualizer</h2>
+          <h2 className="text-2xl font-bold"></h2>
         </div>
 
         <div className="flex gap-2">
           <Button variant="outline" size="icon" onClick={exportAutomata} title="Export as JSON">
-            <Download className="h-4 w-4" />
+            <Download className="h-4 w-4" /> 
           </Button>
           <Button variant="outline" size="icon" onClick={exportImage} title="Export as Image">
-            <Share2 className="h-4 w-4" />
+            <ChartNetwork className="h-4 w-4" /> 
           </Button>
           <Dialog>
             <DialogTrigger asChild>

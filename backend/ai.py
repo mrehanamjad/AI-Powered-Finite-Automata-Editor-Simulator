@@ -1,12 +1,9 @@
-# ai.py
 import os
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 
-# Load environment variables from .env file
 load_dotenv()
 
-# Initialize the Gemini model
 llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.3)
 
 # Template for prompt

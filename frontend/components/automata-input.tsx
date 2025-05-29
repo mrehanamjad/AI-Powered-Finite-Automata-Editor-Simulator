@@ -345,7 +345,7 @@ const handleAiSubmit = async () => {
       <div className="w-full p-2  flex  gap-2 flex-wrap">
         <Dialog open={regexDialogOpen} onOpenChange={setRegexDialogOpen}>
           <DialogTrigger asChild>
-            <Button variant="outline">Convert Regex to NFA/DFA</Button>
+            <Button variant="outline" className="border-purple-600 border-2">Convert Regex to NFA/DFA</Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
@@ -372,7 +372,7 @@ const handleAiSubmit = async () => {
               </div>
             </div>
             <DialogFooter>
-              <Button onClick={handleConvertRegex} className="bg-green-500">
+              <Button onClick={handleConvertRegex} className="bg-gradient-to-r from-cyan-500 to-purple-600">
                 {loadingApi ? "Loading..." : "Get DFA/NFA"}
               </Button>
             </DialogFooter>
@@ -381,7 +381,7 @@ const handleAiSubmit = async () => {
         {/* ----- Ai ------*/}
         <Dialog open={aiDialogOpen} onOpenChange={setAIDialogOpen}>
           <DialogTrigger asChild>
-            <Button type="button" onClick={() => setAIDialogOpen(true)}>
+            <Button type="button" className="bg-gradient-to-r from-cyan-500 to-purple-600" onClick={() => setAIDialogOpen(true)}>
               AI ✨
             </Button>
           </DialogTrigger>
@@ -401,7 +401,7 @@ const handleAiSubmit = async () => {
                 onChange={(e) => setAiInput(e.target.value)}
                 rows={3}
               />
-              <Button onClick={handleAiSubmit} disabled={loadingAiResponse}>
+              <Button className="bg-gradient-to-r from-cyan-500 to-purple-600" onClick={handleAiSubmit} disabled={loadingAiResponse}>
                 {loadingAiResponse ? "Thinking..." : "Ask"}
               </Button>
               {aiResponse && (
