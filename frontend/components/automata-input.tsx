@@ -58,6 +58,7 @@ export default function AutomataInput({
   const [regex, setRegex] = useState("");
   const [regexExpError, setRegexExpError] = useState("");
   const [loadingApi, setLoadingApi] = useState(false);
+  const [regexDialogOpen, setRegexDialogOpen] = useState(false);
 
   useEffect(() => {
     // Convert transitions object to text format
@@ -157,6 +158,7 @@ export default function AutomataInput({
       if (data?.dfa) {
         const parsed = parseAutomaton(data.dfa, "DFA"); // or "NFA" if preferred
         onChange(parsed); // Update the full automata in parent
+        setRegexDialogOpen(false);
       } else {
         setValidationErrors(["Invalid response from server"]);
       }
@@ -303,7 +305,7 @@ export default function AutomataInput({
   return (
     <div className="space-y-4">
       <div className="w-full p-2  flex  gap-2 flex-wrap">
-        <Dialog>
+        <Dialog open={regexDialogOpen} onOpenChange={setRegexDialogOpen}>
           <DialogTrigger asChild>
             <Button variant="outline">Convert Regex to NFA/DFA</Button>
           </DialogTrigger>
@@ -325,7 +327,7 @@ export default function AutomataInput({
                   value={regex}
                 />
                 {regexExpError && (
-                  <p className="text-sm text-red-500 col-span-4 mt-1">
+                  <p className="text-sm text-red-500 col-span-4 text-center mt-1">
                     {regexExpError}
                   </p>
                 )}
@@ -333,7 +335,7 @@ export default function AutomataInput({
             </div>
             <DialogFooter>
               <Button onClick={handleConvertRegex} className="bg-green-500">
-                Get DFA/NFA
+                {loadingApi? "Loading..." :"Get DFA/NFA"}
               </Button>
             </DialogFooter>
           </DialogContent>
