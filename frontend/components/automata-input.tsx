@@ -156,8 +156,8 @@ const handleAiSubmit = async () => {
 
     const data: AutomatonResponse = await res.json();
 
-    if (data?.nfa) {
-      const parsed = parseAutomaton(data.nfa, "NFA");
+    if (data?.dfa) {
+      const parsed = parseAutomaton(data.dfa, "DFA");
       onChange(parsed); // <- Now using the NFA
       setAIDialogOpen(false);
     } else {
