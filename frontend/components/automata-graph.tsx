@@ -663,8 +663,8 @@ export default function AutomataGraph({ automata, simulation }: AutomataGraphPro
 
   return (
     <div className="w-full h-full flex flex-col">
-      <div className="flex justify-between items-center mb-2">
-        <div className="flex items-center gap-2">
+      <div className="flex justify-between items-center mb-2 gap-1 max-sm:flex-col max-sm:items-start">
+        <div className="flex items-center gap-2 ">
           <Button variant="outline" size="sm" onClick={handleZoomIn} title="Zoom In">
             <ZoomIn className="h-4 w-4" />
           </Button>
@@ -683,7 +683,7 @@ export default function AutomataGraph({ automata, simulation }: AutomataGraphPro
         </div>
         <Button variant="outline" size="sm" onClick={handleResetView} title="Reset View">
           <MoveHorizontal className="h-4 w-4 mr-1" />
-          Reset
+          <span >Reset</span>
         </Button>
       </div>
       <div

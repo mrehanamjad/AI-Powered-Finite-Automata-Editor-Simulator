@@ -45,11 +45,11 @@ const AutomataLanding = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden">
       {/* Animated Background */}
-      <div className="absolute inset-0 opacity-20">
+      {/* <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 left-20 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
         <div className="absolute top-40 right-20 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-1000"></div>
         <div className="absolute bottom-20 left-40 w-80 h-80 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-2000"></div>
-      </div>
+      </div> */}
 
       {/* Navigation */}
       <nav className="relative z-50 px-6 py-4">
@@ -117,10 +117,12 @@ const AutomataLanding = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+            <Link href="/editor" className="">
             <button className="group bg-gradient-to-r from-cyan-500 to-purple-600 px-8 py-4 rounded-full text-lg font-semibold hover:shadow-xl hover:shadow-purple-500/25 transition-all transform hover:scale-105 flex items-center space-x-2">
               <span>Start Creating</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
+            </Link>
           </div>
 
           {/* Feature Showcase */}

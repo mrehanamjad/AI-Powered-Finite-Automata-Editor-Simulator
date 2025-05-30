@@ -362,6 +362,7 @@ const handleAiSubmit = async () => {
                   className="col-span-3"
                   onChange={(e) => setRegex(e.target.value)}
                   placeholder="Enter regex here"
+                  required
                   value={regex}
                 />
                 {regexExpError && (
@@ -399,6 +400,7 @@ const handleAiSubmit = async () => {
                 placeholder="e.g., Design a DFA that accepts all strings over the alphabet {a, b} where the string contains zero or more 'a's followed by exactly one 'b' at the end."
                 value={aiInput}
                 onChange={(e) => setAiInput(e.target.value)}
+                required
                 rows={3}
               />
               <Button className="bg-gradient-to-r from-cyan-500 to-purple-600" onClick={handleAiSubmit} disabled={loadingAiResponse}>

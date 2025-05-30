@@ -155,7 +155,7 @@ export default function AutomataVisualizer() {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid grid-cols-2 w-[400px]">
+        <TabsList className="grid grid-cols-2 max-w-[400px] w-fullcd">
           <TabsTrigger value="design">Design</TabsTrigger>
           <TabsTrigger value="simulate">Simulate</TabsTrigger>
         </TabsList>
