@@ -258,6 +258,7 @@ const AutomataLanding = () => {
                 <Twitter className="w-5 h-5" />
               </Link>
               <span className="text-slate-400">© 2025 FA-EDITOR-AI. All rights reserved.</span>
+              <span className="text-slate-400">Made with ♥ by M.Rehan Amjad</span>
             </div>
           </div>
         </div>
@@ -267,3 +268,4 @@ const AutomataLanding = () => {
 };
 
 export default AutomataLanding;
+
