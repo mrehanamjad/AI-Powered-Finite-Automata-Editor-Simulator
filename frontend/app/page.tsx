@@ -103,16 +103,16 @@ const AutomataLanding = () => {
           <div className="mb-8">
             <div className="inline-flex items-center space-x-2 bg-slate-800/50 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
               <Star className="w-4 h-4 text-yellow-400" />
-              <span className="text-sm">AI-Powered Automata Design</span>
+              <span className="text-sm">FA-EDITOR-AI</span>
             </div>
             
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              Design <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Finite Automata</span> with Intelligence
+              <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">AI Powered </span> Finite Automata Editor & Simulator
             </h1>
             
             <p className="text-xl text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed">
               The first AI-powered platform to design, visualize, and simulate Deterministic and Non-deterministic Finite Automata. 
-              Convert regex to DFA/NFA and ask questions in natural language to generate diagrams instantly.
+              Convert regex to DFA/NFA and <span className="font-semibold text-white">ask AI in natural language to generate diagrams instantly</span>.
             </p>
           </div>
 
