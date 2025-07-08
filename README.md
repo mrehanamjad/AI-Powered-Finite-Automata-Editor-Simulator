@@ -1,12 +1,19 @@
 # AI Powered Finite Automata Editor & Simulator
-- AI Powered Finite Autometa Editor and Simulator 
-- Design, visualize, and simulate Deterministic and Non-deterministic Finite Automata 
-- Convert Regex to DFA and NFA 
-- ***AI Assistant for Finite Automata***
+AI Powered Finite Autometa Editor and Simulator | Design, visualize, and simulate Deterministic and Non-deterministic Finite Automata | Convert Regex to DFA and NFA | ***AI Assistant for Finite Automata***
 
+---
 
-## Introduction
-FA-Editor-AI is a web-based tool that allows users to design, visualize, and simulate both Deterministic Finite Automata (DFA) and Non-deterministic Finite Automata (NFA). It also provides the ability to convert regular expressions to DFA and NFA. Additionally, the tool includes an AI assistant that can help users with various tasks related to finite automata.
+## 🔍 Introduction
+
+**FA-Editor-AI** is a web-based platform that empowers users to:
+
+- Design and simulate **DFA** and **NFA**
+- Convert **regular expressions** to **DFA** and **NFA**
+- Use a built-in **AI assistant** to generate automata from natural language prompts
+
+Whether you're a student, teacher, or enthusiast, this tool simplifies complex automata concepts through an intuitive and interactive interface.
+
+---
 
 ## ✨ Features
 
