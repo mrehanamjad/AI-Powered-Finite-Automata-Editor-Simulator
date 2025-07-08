@@ -112,7 +112,7 @@ const AutomataLanding = () => {
             
             <p className="text-xl text-slate-300 mb-8 max-w-3xl mx-auto leading-relaxed">
               The first AI-powered platform to design, visualize, and simulate Deterministic and Non-deterministic Finite Automata. 
-              Convert regex to DFA/NFA and <span className="font-semibold text-white bg-yellow-700">ask AI in natural language to generate diagrams instantly</span>.
+              Convert regex to DFA/NFA and <span className="font-semibold text-blue-800 bg-yellow-300  p-2">ask AI in natural language to generate diagrams instantly</span>.
             </p>
           </div>
 
