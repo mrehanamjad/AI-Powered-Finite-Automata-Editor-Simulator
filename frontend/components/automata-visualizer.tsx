@@ -9,7 +9,7 @@ import AutomataGraph from "./automata-graph"
 import AutomataSimulator from "./automata-simulator"
 import AutomataExamples from "./automata-examples"
 import { ModeToggle } from "./mode-toggle"
-import { Download, Info, Maximize2, ChartNetwork } from "lucide-react"
+import { Download, Info, Maximize2, Image } from "lucide-react"
 import type { AutomataDefinition, SimulationState } from "@/lib/automata-types"
 import { defaultDFA } from "@/lib/automata-examples"
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
@@ -111,7 +111,7 @@ export default function AutomataVisualizer() {
             <Download className="h-4 w-4" /> 
           </Button>
           <Button variant="outline" size="icon" onClick={exportImage} title="Export as Image">
-            <ChartNetwork className="h-4 w-4" /> 
+            <Image className="h-4 w-4" /> 
           </Button>
           <Dialog>
             <DialogTrigger asChild>
