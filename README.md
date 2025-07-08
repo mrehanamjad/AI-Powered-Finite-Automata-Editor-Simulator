@@ -1,6 +1,9 @@
 # AI Powered Finite Automata Editor & Simulator
 AI Powered Finite Autometa Editor and Simulator | Design, visualize, and simulate Deterministic and Non-deterministic Finite Automata | Convert Regex to DFA and NFA | ***AI Assistant for Finite Automata***
 
+## 🚀 Live Site
+🔗 [FA Editor AI (Deployed on Vercel)](https://fa-editor-ai.vercel.app/)
+
 ---
 
 ## 🔍 Introduction
